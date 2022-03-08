@@ -11,10 +11,10 @@ const LegoProvider = ({ children }) => {
     const index = likedSets.indexOf(setNum)
     if (index > -1) {
       likedSets.splice(index, 1)
+      setLikedSets([...likedSets])
     } else {
       setLikedSets([...likedSets, setNum])
     }
-    console.log('likedSets', likedSets)
   }
 
   return (

@@ -2,11 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components/macro';
 import { LegoContext } from '../context/LegoContext';
 
 const Details = () => {
-  const { chosenSet, toggleLike } = React.useContext(LegoContext)
-  console.log('DetailsSet: ', chosenSet)
+  const { chosenSet, toggleLike, likedSets } = React.useContext(LegoContext)
   const navigate = useNavigate()
   const heart = <FontAwesomeIcon icon={faHeart} />
 
@@ -18,10 +18,15 @@ const Details = () => {
         <li>Release Year: {chosenSet.year}</li>
         <li>Number of parts: {chosenSet.num_parts}</li>
       </ul>
-      <button type="button" onClick={() => toggleLike(chosenSet.set_num)}>{heart}</button>
+      <LikeButton type="button" likedSets={likedSets} setNum={chosenSet.set_num} onClick={() => toggleLike(chosenSet.set_num)}>{heart}</LikeButton>
       <button type="button" onClick={() => navigate('/')}>Back</button>
     </>
   )
 }
 
 export default Details
+
+const LikeButton = styled.button`
+  border: none;
+  color: ${(props) => (props.likedSets.includes(props.setNum) ? 'red' : 'black')}
+`
