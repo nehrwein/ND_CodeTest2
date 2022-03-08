@@ -1,9 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LegoProvider from './context/LegoContext'
+import Overview from './pages/Overview'
+import Details from './pages/Details';
+import './App.css'
 
-export const App = () => {
+const App = () => {
   return (
-    <div>
-      Find me in src/app.js!
-    </div>
-  )
+    <LegoProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Overview />} />
+          <Route path="/sets/:setNum" element={<Details />} />
+        </Routes>
+      </BrowserRouter>
+    </LegoProvider>
+  );
 }
+
+export default App;
