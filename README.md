@@ -1,19 +1,9 @@
-# Technigo React Starter App
+# Task
 
-This app has been generated using `create-react-app`, then cleaned up a little so we have a project with just the elements we need to get started.
+Create an application that uses the Rebrickable LEGO API. The application should consist of two views.
 
-Add components in the `src` folder and use them in `src/app.js` to get started.
+1. On the overview page, users should be able to select Lego Themes in a dropdown. Lego Themes can be fetched from the themes API. When the user selects a theme the application should show all LEGO sets using this theme (from the sets API).
 
-## Usage
+2. Users should be able to click on a set and go to a details view. The details view should display information about the LEGO set and also show a picture of the set. Users should be able to “like” a set in the details view. When a set is "liked" it should be visualized somehow in the overview page (e.g. with an icon, emoji or something).
 
-1. On GitHub, click the 'use this template' button to create a new repo on your account
-1. Clone the new repo to your computer
-1. Install required dependencies with npm: `npm install`
-1. Start the project: `npm start`
-
-Alternatively, if you don't want a new git repo on your account;
-
-1. Download & extract the [latest release](https://github.com/Technigo/react-starter/releases/latest) from GitHub
-1. Open the directory in the terminal: `cd /path/to/react-starter`
-1. Install required dependencies with npm: `npm install`
-1. Start the project: `npm start`
+This does not need to be stored in a database or anything, local state or session state is enough for this task.

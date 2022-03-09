@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LegoProvider from './context/LegoContext'
 import Overview from './pages/Overview'
 import Details from './pages/Details';
-import './App.css'
 
 const App = () => {
   return (
