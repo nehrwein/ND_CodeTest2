@@ -7,3 +7,6 @@ Create an application that uses the Rebrickable LEGO API. The application should
 2. Users should be able to click on a set and go to a details view. The details view should display information about the LEGO set and also show a picture of the set. Users should be able to “like” a set in the details view. When a set is "liked" it should be visualized somehow in the overview page (e.g. with an icon, emoji or something).
 
 This does not need to be stored in a database or anything, local state or session state is enough for this task.
+
+# View it live
+Visit the deployed project here: https://nd-lego-codetask.netlify.app/
