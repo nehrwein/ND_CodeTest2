@@ -22,7 +22,9 @@ const Sets = () => {
 
     fetch(API_URL(`sets/?page_size=1000&theme_id=${chosenTheme}`), options)
       .then((res) => res.json())
-      .then((data) => setSets(data.results))
+      .then((data) => {
+        setSets(data.results)
+      })
   }, [chosenTheme, setSets])
 
   const onNavigatingHome = () => {
@@ -36,20 +38,20 @@ const Sets = () => {
       <SetsSection>
         {sets?.map((set) => [
           <Set key={set.set_num}>
-            <p>Set: {set.set_num}</p>
-            <Link
+            <StyledLink
               to={`/set/${set.set_num}`}
               onClick={() => setChosenSet(set)}>
-              <p>{set.name}</p>
-            </Link>
-            <p>Year: {set.year}</p>
-            {likedSets.includes(set.set_num)
-            && (
-              <LikeIcon
-                likedSets={likedSets}
-                setNum={set.set_num}>{heart}
-              </LikeIcon>
-            )}
+              <h3>{set.name} ({set.set_num})</h3>
+              <Thumbnail src={set.set_img_url} alt={set.name} />
+              <p>Year: {set.year}</p>
+              {likedSets.includes(set.set_num)
+              && (
+                <LikeIcon
+                  likedSets={likedSets}
+                  setNum={set.set_num}>{heart}
+                </LikeIcon>
+              )}
+            </StyledLink>
           </Set>
         ])}
       </SetsSection>
@@ -71,7 +73,7 @@ const LikeIcon = styled.i`
 
 const SetsSection = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   justify-content: space-between;
   grid-gap: 5px;
   width: 80vw;
@@ -79,6 +81,9 @@ const SetsSection = styled.section`
 `
 
 const Set = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0 10px;
   text-align: left;
   border: 2px solid orange;
@@ -89,4 +94,17 @@ const BackButton = styled.button`
   padding: 5px;
   font-size: 16px;
   margin-top: 10px;
+`
+
+const Thumbnail = styled.img`
+  width: 150px;
+`
+
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+
+  h3 {
+    text-decoration: underline;
+  }
 `
