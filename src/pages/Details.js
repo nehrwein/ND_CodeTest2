@@ -29,7 +29,7 @@ const Details = () => {
         </LikeButton>
         <BackButton
           type="button"
-          onClick={() => navigate('/')}>Back
+          onClick={() => navigate('/sets')}>Back
         </BackButton>
       </SetContainer>
     </>

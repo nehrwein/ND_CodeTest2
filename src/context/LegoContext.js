@@ -5,6 +5,7 @@ export const LegoContext = React.createContext()
 const LegoProvider = ({ children }) => {
   const [sets, setSets] = useState([])
   const [chosenSet, setChosenSet] = useState({})
+  const [chosenTheme, setChosenTheme] = useState('')
   const [likedSets, setLikedSets] = useState([])
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const LegoProvider = ({ children }) => {
 
   return (
     <LegoContext.Provider
-      value={{ sets, setSets, chosenSet, setChosenSet, toggleLike, likedSets }}>
+      value={{ sets, setSets, chosenSet, setChosenSet, chosenTheme, setChosenTheme, toggleLike, likedSets }}>
       {children}
     </LegoContext.Provider>
   )
