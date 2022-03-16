@@ -1,31 +1,37 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components/macro';
 import { LegoContext } from '../context/LegoContext';
-import { API_URL } from '../utils/urls'
+import { API_URL, options } from '../utils/urls'
 
 const Sets = () => {
-  const { chosenTheme, setChosenTheme, sets, setSets, setChosenSet, likedSets } = React.useContext(LegoContext)
+  const {
+    chosenTheme,
+    setChosenTheme,
+    setChosenSet,
+    likedSets
+  } = React.useContext(LegoContext)
+
+  const [sets, setSets] = useState([])
   const heart = <FontAwesomeIcon icon={faHeart} />
   const navigate = useNavigate()
 
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'key cef91563c41612c871ed256c1a22e628'
-      }
-    }
+    const setsStorage = JSON.parse(localStorage.getItem('setsStorage'))
 
-    fetch(API_URL(`sets/?page_size=1000&theme_id=${chosenTheme}`), options)
-      .then((res) => res.json())
-      .then((data) => {
-        setSets(data.results)
-      })
-  }, [chosenTheme, setSets])
+    if (setsStorage) {
+      setSets(setsStorage)
+    } else {
+      fetch(API_URL(`sets/?page_size=1000&theme_id=${chosenTheme}`), options)
+        .then((res) => res.json())
+        .then((data) => {
+          setSets(data.results)
+          localStorage.setItem('setsStorage', JSON.stringify(data.results))
+        })
+    }
+  }, [chosenTheme])
 
   const onNavigatingHome = () => {
     setChosenTheme('')
@@ -34,7 +40,7 @@ const Sets = () => {
 
   return (
     <div>
-      <h2>Sets</h2>
+      <h1>LEGO-Sets</h1>
       <SetsSection>
         {sets?.map((set) => [
           <Set key={set.set_num}>
@@ -43,7 +49,6 @@ const Sets = () => {
               onClick={() => setChosenSet(set)}>
               <h3>{set.name} ({set.set_num})</h3>
               <Thumbnail src={set.set_img_url} alt={set.name} />
-              <p>Year: {set.year}</p>
               {likedSets.includes(set.set_num)
               && (
                 <LikeIcon
@@ -85,7 +90,6 @@ const Set = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 0 10px;
-  text-align: left;
   border: 2px solid orange;
   background-color: peachpuff;
 `
@@ -102,9 +106,4 @@ const Thumbnail = styled.img`
 
 const StyledLink = styled(Link)`
   color: black;
-  text-decoration: none;
-
-  h3 {
-    text-decoration: underline;
-  }
 `

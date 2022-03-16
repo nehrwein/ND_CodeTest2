@@ -11,7 +11,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Overview />} />
-          <Route path="/sets/:name" element={<Sets />} />
+          <Route path="/sets/:themeNum" element={<Sets />} />
           <Route path="/set/:setNum" element={<Details />} />
         </Routes>
       </BrowserRouter>

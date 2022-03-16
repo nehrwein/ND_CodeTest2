@@ -2,23 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { LegoContext } from '../context/LegoContext';
-import { API_URL } from '../utils/urls'
+import { API_URL, options } from '../utils/urls'
 
 const Overview = () => {
   const { chosenTheme, setChosenTheme } = React.useContext(LegoContext)
   const [themes, setThemes] = useState([])
   const navigate = useNavigate()
+  const keysToRemove = ['chosenStorageTheme', 'chosenSetStorage', 'setsStorage']
+
+  useEffect(() => {
+    keysToRemove.forEach((key) => localStorage.removeItem(key))
+  }, [keysToRemove])
 
   // fetch all the available lego-themes
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'key cef91563c41612c871ed256c1a22e628'
-      }
-    }
-
     fetch(API_URL('themes/?page_size=1000'), options)
       .then((res) => res.json())
       .then((data) => {
@@ -33,7 +30,7 @@ const Overview = () => {
 
   return (
     <div>
-      <h1>Lego-Sets</h1>
+      <h1>LEGO-Themes</h1>
       <ThemeSelect
         value={chosenTheme}
         onChange={(e) => onChoosingTheme(e.target.value)}>

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 export const LegoContext = React.createContext()
 
 const LegoProvider = ({ children }) => {
-  const [sets, setSets] = useState([])
   const [chosenSet, setChosenSet] = useState({})
   const [chosenTheme, setChosenTheme] = useState('')
   const [likedSets, setLikedSets] = useState([])
@@ -13,11 +12,25 @@ const LegoProvider = ({ children }) => {
     if (likedStorageSets) {
       setLikedSets(likedStorageSets)
     }
+
+    const chosenStorageTheme = localStorage.getItem('chosenStorageTheme')
+    if (chosenStorageTheme) {
+      setChosenTheme(chosenStorageTheme)
+    }
+
+    const chosenSetStorage = JSON.parse(localStorage.getItem('chosenSetStorage'))
+    if (chosenSetStorage) {
+      setChosenSet(chosenSetStorage)
+    }
   }, [])
 
   useEffect(() => {
     localStorage.setItem('likedLegoSets', JSON.stringify(likedSets))
-  }, [likedSets])
+
+    localStorage.setItem('chosenStorageTheme', chosenTheme)
+
+    localStorage.setItem('chosenSetStorage', JSON.stringify(chosenSet))
+  }, [likedSets, chosenTheme, chosenSet])
 
   const toggleLike = (setNum) => {
     const index = likedSets.indexOf(setNum)
@@ -31,7 +44,14 @@ const LegoProvider = ({ children }) => {
 
   return (
     <LegoContext.Provider
-      value={{ sets, setSets, chosenSet, setChosenSet, chosenTheme, setChosenTheme, toggleLike, likedSets }}>
+      value={{
+        chosenSet,
+        setChosenSet,
+        chosenTheme,
+        setChosenTheme,
+        toggleLike,
+        likedSets
+      }}>
       {children}
     </LegoContext.Provider>
   )

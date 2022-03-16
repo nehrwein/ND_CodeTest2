@@ -6,14 +6,19 @@ import styled from 'styled-components/macro';
 import { LegoContext } from '../context/LegoContext';
 
 const Details = () => {
-  const { chosenSet, toggleLike, likedSets } = React.useContext(LegoContext)
+  const { chosenSet, setChosenSet, toggleLike, likedSets } = React.useContext(LegoContext)
   const navigate = useNavigate()
   const heart = <FontAwesomeIcon icon={faHeart} />
+
+  const onNavigate = (id) => {
+    setChosenSet({})
+    navigate(`/sets/${id}`)
+  }
 
   return (
     <>
       <SetContainer>
-        <h2>{chosenSet.name}</h2>
+        <h1>{chosenSet.name}</h1>
         <SetImage
           src={chosenSet.set_img_url}
           alt={chosenSet.name} />
@@ -29,7 +34,7 @@ const Details = () => {
         </LikeButton>
         <BackButton
           type="button"
-          onClick={() => navigate(`/sets/${chosenSet.theme_id}`)}>Back
+          onClick={() => onNavigate(chosenSet.theme_id)}>Back
         </BackButton>
       </SetContainer>
     </>
@@ -55,7 +60,7 @@ const BackButton = styled.button`
 
 const SetImage = styled.img`
   display: block;
-  font-size: 30px;
+  width: 400px;
 `
 
 const SetContainer = styled.div`
