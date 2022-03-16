@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components/macro';
@@ -9,14 +9,12 @@ import { API_URL, options } from '../utils/urls'
 const Sets = () => {
   const {
     chosenTheme,
-    setChosenTheme,
     setChosenSet,
     likedSets
   } = React.useContext(LegoContext)
 
   const [sets, setSets] = useState([])
   const heart = <FontAwesomeIcon icon={faHeart} />
-  const navigate = useNavigate()
 
   useEffect(() => {
     const setsStorage = JSON.parse(localStorage.getItem('setsStorage'))
@@ -32,11 +30,6 @@ const Sets = () => {
         })
     }
   }, [chosenTheme])
-
-  const onNavigatingHome = () => {
-    setChosenTheme('')
-    navigate('/')
-  }
 
   return (
     <div>
@@ -60,10 +53,6 @@ const Sets = () => {
           </Set>
         ])}
       </SetsSection>
-      <BackButton
-        type="button"
-        onClick={onNavigatingHome}>Back
-      </BackButton>
     </div>
   )
 }
@@ -92,12 +81,6 @@ const Set = styled.div`
   padding: 0 10px;
   border: 2px solid orange;
   background-color: peachpuff;
-`
-const BackButton = styled.button`
-  width: 80px;
-  padding: 5px;
-  font-size: 16px;
-  margin-top: 10px;
 `
 
 const Thumbnail = styled.img`
