@@ -24,7 +24,7 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   height: 60px;
-  background-color: rgba(101, 81, 75, 0.5);
+  background-color: rgb(21, 20, 16);
   padding-left: 20px;
 `
 

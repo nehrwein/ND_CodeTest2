@@ -11,20 +11,22 @@ const Details = () => {
   return (
     <>
       <SetContainer>
-        <h1>{chosenSet.name}</h1>
-        <SetImage
-          src={chosenSet.set_img_url}
-          alt={chosenSet.name} />
-        <ul>
-          <li>Release Year: {chosenSet.year}</li>
-          <li>Number of parts: {chosenSet.num_parts}</li>
-        </ul>
-        <LikeButton
-          type="button"
-          likedSets={likedSets}
-          setNum={chosenSet.set_num}
-          onClick={() => toggleLike(chosenSet.set_num)}>{heart}
-        </LikeButton>
+        <h1>Set &quot;{chosenSet.name}&quot;</h1>
+        <InfoContainer>
+          <SetImage
+            src={chosenSet.set_img_url}
+            alt={chosenSet.name} />
+          <ul>
+            <li>Release Year: {chosenSet.year}</li>
+            <li>Number of parts: {chosenSet.num_parts}</li>
+          </ul>
+          <LikeButton
+            type="button"
+            likedSets={likedSets}
+            setNum={chosenSet.set_num}
+            onClick={() => toggleLike(chosenSet.set_num)}>{heart}
+          </LikeButton>
+        </InfoContainer>
       </SetContainer>
     </>
   )
@@ -32,24 +34,44 @@ const Details = () => {
 
 export default Details
 
+const InfoContainer = styled.div`
+  background-color: rgb(62, 159, 180);
+  border: 10px solid rgb(62, 159, 180);
+  border-radius: 10px;
+`
+
 const LikeButton = styled.button`
-  border: none;
-  background-color: transparent;
-  font-size: 30px;
+  border-color: transparent;
+  font-size: 24px;
   cursor: pointer;
   margin-bottom: 20px;
-  color: ${(props) => (props.likedSets.includes(props.setNum) ? 'red' : 'black')}
+  color: ${(props) => (props.likedSets.includes(props.setNum) ? 'red' : 'black')};
+  background-color: whitesmoke;
+  border-radius: 50px;
+  width: 38px;
+  height: 38px;
+  transition: all 0.2s ease-in-out;
+
+  :hover {
+    transform: scale(1.1)
+  }
 `
 
 const SetImage = styled.img`
   display: block;
-  width: 400px;
+  width: 360px;
+  border-radius: 10px;
 `
 
 const SetContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 300px;
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  padding: 10px;
   margin: 0 auto;
+  background-color: rgba(21, 20, 16, 0.5);
+  color: whitesmoke;
 `
