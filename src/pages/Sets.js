@@ -104,7 +104,7 @@ const Thumbnail = styled.div`
   height: 150px;
   background: url(${(props) => props.image});
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
   background-size: cover;
   margin: 0 auto;
   border-radius: 10px;

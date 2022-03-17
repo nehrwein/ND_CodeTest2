@@ -50,10 +50,10 @@ const LikeButton = styled.button`
   border-radius: 50px;
   width: 38px;
   height: 38px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   :hover {
-    transform: scale(1.1)
+    transform: scale(1.3)
   }
 `
 
