@@ -69,7 +69,6 @@ const SetsContainer = styled.div`
   width: 100vw;
   height: 100%;
   min-height: 100vh;
-  padding: 10px;
   margin: 0 auto;
   background-color: rgba(21, 20, 16, 0.5);
   color: whitesmoke;
